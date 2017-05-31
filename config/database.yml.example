@@ -2,16 +2,16 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: stack
+  database: myapp_development
   pool: 5
-  username: djeik
-  password: djeik84
+  username: myapp
+  password: password1
 
 #test database
 test:
   adapter: postgresql
   encoding: unicode
-  database: stack_test
+  database: myapp_test
   pool: 5
-  username: djeik
-  password: djeik84
+  username: myapp
+  password: password1
