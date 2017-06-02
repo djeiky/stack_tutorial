@@ -1,1 +1,10 @@
-Hello world
+%h1Вопросы и ответы
+%br
+
+- @questions.each do |question|
+  .row
+    %h2= link_to question.title, question_path(question)
+.row
+  %br
+  %br
+  = link_to "Добаваить вопрос", new_question_path, type: "button", class: "btn btn-lg btn-primary"

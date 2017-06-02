@@ -1,0 +1,14 @@
+.row
+  = form_for @question do |f|
+    .row
+      .col-md-2
+        = f.label "Тема"
+      .col-md-8
+        = f.text_field :title
+    .row
+      .col-md-2
+        = f.label "Содержание вопроса"
+      .col-md-8
+        = f.text_area :body
+    .row
+      = f.submit "Сохранить"
