@@ -1,0 +1,20 @@
+.row
+%h2
+  = @question.title
+.row
+  = @question.body
+.row
+  %h3Комментарии
+.row
+  - @question.answers.each do |answer|
+    .row
+      = answer.body
+.row
+  %h4Добавить комментарий
+.row
+  = form_for @answer do |f|
+    = f.text_field :question_id, hidden: true
+    = f.text_field :body
+    = f.submit "Сохранить"
+.row
+  = link_to "Назад", questions_path

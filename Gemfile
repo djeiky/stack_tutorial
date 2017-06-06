@@ -58,3 +58,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #rubocop
 gem 'rubocop'
+
+#twitter bootstrap
+gem 'bootstrap-sass'
+gem 'sprockets-rails'
+gem 'autoprefixer-rails'
