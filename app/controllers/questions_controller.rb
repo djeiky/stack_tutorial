@@ -1,5 +1,4 @@
 class QuestionsController < ApplicationController
-
   before_filter :set_question, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -41,6 +40,4 @@ class QuestionsController < ApplicationController
   def questions_params
     params.require(:question).permit(:title, :body)
   end
-
-
 end
