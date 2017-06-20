@@ -33,7 +33,7 @@ RSpec.describe AnswersController, :type => :controller do
 
     context 'invalid answer' do
       it 'not save to database' do
-        expect{post :create, params: {question_id: question, answer: attributes_for(:invalid_answer)}}.to_not change(question.answers, :count)
+        expect{post :create, params: {question_id: question, answer: attributes_for(:invalid_answer)}}.to_not change(Answer, :count)
       end
 
       it 'render new view' do
@@ -42,13 +42,5 @@ RSpec.describe AnswersController, :type => :controller do
       end
     end
   end
-
-
-
-
-
-  describe 'POST #create' do
-  end
-
 end
 
