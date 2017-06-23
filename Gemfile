@@ -40,6 +40,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
+  gem 'capybara'
 end
 
 group :development do
