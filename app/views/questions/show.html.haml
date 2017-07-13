@@ -4,17 +4,25 @@
 .row
   = @question.body
 .row
+  - if current_user&.author_of?(@question)
+    = link_to 'Delete question', question_path(@question), method: :delete
+.row
   %h3Комментарии
 .row
   - @question.answers.each do |answer|
-    .row
-      = answer.body
+    - unless answer.id.blank?
+      .row
+        = answer.body
+      .row
+        - if current_user&.author_of?(answer)
+          = link_to 'Delete answer', question_answer_path(@question, answer), method: :delete
+
 .row
   %h4Добавить комментарий
 .row
-  = form_for @answer do |f|
-    = f.text_field :question_id, hidden: true
+  = form_for([@question, @answer]) do |f|
+    = f.label :body
     = f.text_field :body
-    = f.submit "Сохранить"
+    = f.submit "Create answer"
 .row
   = link_to "Назад", questions_path

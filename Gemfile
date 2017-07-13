@@ -41,6 +41,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
   gem 'capybara'
+  gem 'launchy'
 end
 
 group :development do
@@ -65,3 +66,6 @@ gem 'rubocop'
 gem 'bootstrap-sass'
 gem 'sprockets-rails'
 gem 'autoprefixer-rails'
+
+#Device
+gem 'devise'
