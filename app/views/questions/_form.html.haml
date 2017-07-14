@@ -1,14 +1,16 @@
 .row
+  = render "shared/error_form", object: @question
+.row
   = form_for @question do |f|
     .row
       .col-md-2
-        = f.label "Тема"
+        = f.label :title
       .col-md-8
         = f.text_field :title
     .row
       .col-md-2
-        = f.label "Содержание вопроса"
+        = f.label :body
       .col-md-8
         = f.text_area :body
     .row
-      = f.submit "Сохранить"
+      = f.submit "Create"

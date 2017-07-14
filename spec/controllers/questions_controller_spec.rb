@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, :type => :controller do
-  let(:question) { create(:question) }
+  let(:user) { create(:user) }
+  let(:question) { create(:question, user: user) }
 
   describe 'GET #index' do
     let(:questions) { create_list(:question, 2) }
@@ -30,6 +31,8 @@ RSpec.describe QuestionsController, :type => :controller do
   end
 
   describe 'GET #new' do
+    sign_in_user
+
     before {get :new}
 
     it 'assigns @question to a new Question' do
@@ -42,6 +45,8 @@ RSpec.describe QuestionsController, :type => :controller do
   end
 
   describe 'GET #edit' do
+    sign_in_user
+
     before {get :edit, params: {id: question}}
 
     it 'assigns @question to requested question' do
@@ -54,6 +59,7 @@ RSpec.describe QuestionsController, :type => :controller do
   end
 
   describe 'POST #create' do
+    sign_in_user
 
     context 'valid attributes' do
       it 'saves question to database' do
@@ -79,6 +85,8 @@ RSpec.describe QuestionsController, :type => :controller do
   end
 
   describe 'PATCH #update' do
+    sign_in_user
+
     context 'valid attributes' do
       it 'assigns @question to requested question' do
         patch :update, params: {id: question, question: attributes_for(:question)}
@@ -104,9 +112,11 @@ RSpec.describe QuestionsController, :type => :controller do
       before { patch :update, params: {id: question, question: {title: nil, body: "body"}} }
 
       it 'not save updated question' do
+        title = question.title
+        body = question.body
         question.reload
-        expect(question.title).to eq "MyString"
-        expect(question.body).to eq "MyText"
+        expect(question.title).to eq title
+        expect(question.body).to eq body
       end
 
       it 'render edit view' do
@@ -116,10 +126,19 @@ RSpec.describe QuestionsController, :type => :controller do
   end
 
   describe 'DELETE #destroy' do
+    sign_in_user
+
     before {question}
 
-    it 'deletes question' do
+    it 'user deletes own question' do
+      question = create(:question, user: @user)
       expect{ delete :destroy, params:{id: question} }.to change(Question, :count).by(-1)
+    end
+
+    it "user can't delete someone else question" do
+      question = create(:question, user: create(:user))
+      expect{ delete :destroy, params:{id: question} }.to_not change(Question, :count)
+
     end
 
     it 'redirect to index view' do
