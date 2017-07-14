@@ -3,10 +3,6 @@ class AnswersController < ApplicationController
   before_action :set_question, only: [:new, :create, :destroy]
   before_action :set_answer, only: [:destroy]
 
-  #def new
-  #  @answer = @question.answers.build
-  #end
-
   def create
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
@@ -14,7 +10,6 @@ class AnswersController < ApplicationController
       flash[:notice] = "Your answer successfully created."
       redirect_to question_path(@question)
     else
-      flash[:notice] = "Body can't be empty!"
       render 'questions/show'
     end
   end
@@ -24,7 +19,7 @@ class AnswersController < ApplicationController
       flash[:notice] = "Your answer successfully deleted."
       @answer.destroy
     else
-
+      flash[:notice] = "You are not author of the answer"
     end
     redirect_to question_path(@question)
   end

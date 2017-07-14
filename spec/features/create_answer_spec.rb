@@ -24,7 +24,7 @@ feature 'User answer the question', %q{
 
     click_on 'Create answer'
 
-    expect(page).to have_content "Body can't be empty!"
+    expect(page).to have_content "Body can't be blank"
   end
 
   scenario 'Non-Registered user tries to create answer' do

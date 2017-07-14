@@ -21,6 +21,9 @@
   %h4Добавить комментарий
 .row
   = form_for([@question, @answer]) do |f|
+    .row
+      = render "shared/error_form", object: f.object
+    .row
     = f.label :body
     = f.text_field :body
     = f.submit "Create answer"

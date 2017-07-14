@@ -13,7 +13,7 @@ feature 'User delete answer', %q{
   scenario 'Authenticated user tries to delete own answer' do
     sign_in user
     visit question_path question
-#save_and_open_page
+
     click_on 'Delete answer'
 
     expect(page).to have_content 'Your answer successfully deleted.'

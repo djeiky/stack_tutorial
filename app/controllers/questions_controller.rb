@@ -40,6 +40,7 @@ class QuestionsController < ApplicationController
       @question.destroy
       flash[:notice] = "Your question seccessfully deleted."
     else
+      flash[:notice] = "You are not author of the question"
     end
     redirect_to questions_path
   end

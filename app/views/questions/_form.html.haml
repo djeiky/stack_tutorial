@@ -1,4 +1,6 @@
 .row
+  = render "shared/error_form", object: @question
+.row
   = form_for @question do |f|
     .row
       .col-md-2
