@@ -1,0 +1,9 @@
+- if object && object.errors.any?
+  .error_message
+    %p
+      = "#{object.errors.count} errors in #{object.class.name}"
+    %ul
+      - object.errors.full_messages.each do |message|
+        %li
+          = message
+
