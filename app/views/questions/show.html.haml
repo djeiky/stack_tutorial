@@ -10,10 +10,7 @@
   %h3Комментарии
 .row
   .answers
-    - @question.answers.each do |answer|
-      - unless answer.id.nil?
-        = render 'answer', answer: answer
-
+    = render @question.answers
 .row
   %h4Добавить комментарий
 .row

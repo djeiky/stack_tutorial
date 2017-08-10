@@ -6,9 +6,7 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
-    if !@answer.save
-      render "error"
-    end
+    render "error" unless @answer.save
 
   end
 
