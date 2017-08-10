@@ -6,19 +6,22 @@ feature 'User answer the question', %q{
 } do
 
   given(:user) { create(:user) }
-  given(:question) {create(:question)}
-  scenario 'Authenticated user create answer' do
+  given(:question) {create(:question, user: user)}
+
+  scenario 'Authenticated user create answer', js: true do
     sign_in user
-    visit question_path question
+
+    visit question_path(question)
 
     fill_in 'Body', with: "comment"
     click_on 'Create answer'
 
-    expect(page).to have_content "Your answer successfully created."
-    expect(page).to have_content "comment"
+    within ".answers" do
+      expect(page).to have_content "comment"
+    end
   end
 
-  scenario 'Authenticated user tries to answer the question with blank answer' do
+  scenario 'Authenticated user tries to answer the question with blank answer', js: true do
     sign_in user
     visit question_path question
 
