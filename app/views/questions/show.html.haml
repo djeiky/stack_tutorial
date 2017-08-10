@@ -9,18 +9,15 @@
 .row
   %h3Комментарии
 .row
-  - @question.answers.each do |answer|
-    - unless answer.id.blank?
-      .row
-        = answer.body
-      .row
-        - if current_user&.author_of?(answer)
-          = link_to 'Delete answer', question_answer_path(@question, answer), method: :delete
+  .answers
+    - @question.answers.each do |answer|
+      - unless answer.id.nil?
+        = render 'answer', answer: answer
 
 .row
   %h4Добавить комментарий
 .row
-  = form_for([@question, @answer]) do |f|
+  = form_for [@question, @answer], remote: true do |f|
     .row
       = render "shared/error_form", object: f.object
     .row
