@@ -25,13 +25,22 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+    if current_user.author_of?(@question)
+      render :edit
+    else
+      redirect_to questions_path
+    end
   end
 
   def update
-    if @question.update(questions_params)
-      redirect_to question_path(@question)
+    if current_user.author_of?(@question)
+      if @question.update(questions_params)
+        redirect_to questions_path
+      else
+       render :edit
+      end
     else
-      render :edit
+      redirect_to questions_path
     end
   end
 

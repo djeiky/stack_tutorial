@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../feature_helper'
 
 feature 'Create questions', %q{
   In order to get answers
@@ -14,7 +14,7 @@ feature 'Create questions', %q{
 
     fill_in "Title", with: "NewTitle"
     fill_in "Body", with: "NewBody"
-    click_on "Create"
+    click_on "Save"
 
     expect(page).to have_content 'Your question successfully created.'
     expect(page).to have_content 'NewTitle'
@@ -28,7 +28,7 @@ feature 'Create questions', %q{
 
     fill_in "Title", with: ''
     fill_in "Body", with: 'Question body'
-    click_on "Create"
+    click_on "Save"
 
     expect(page).to have_content "Title can't be blank"
   end
