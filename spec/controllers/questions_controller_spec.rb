@@ -103,6 +103,14 @@ RSpec.describe QuestionsController, :type => :controller do
          expect(response). to redirect_to questions_path
 
       end
+
+
+      let!(:another_user) { create(:user) }
+      let!(:another_question) {create(:question, user: another_user)}
+      it 'non author tries to edit question' do
+        patch :update, params: {id: another_question, question: {title: "NewTitle", body: "NewBody"}}
+        expect(response).to redirect_to questions_path
+      end
     end
 
     context 'invalid attributes' do
