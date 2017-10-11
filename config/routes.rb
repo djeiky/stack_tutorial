@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root "questions#index"
 
   resources :questions do
-    resources :answers
+    resources :answers do
+      put :best, on: :member
+    end
   end
 end

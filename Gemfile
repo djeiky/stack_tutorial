@@ -42,7 +42,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'capybara'
   gem 'launchy'
-  gem 'selenium-webdriver', '~> 2.53.4'
+  gem 'capybara-webkit'
   gem 'geckodriver-helper'
   gem 'database_cleaner'
 end

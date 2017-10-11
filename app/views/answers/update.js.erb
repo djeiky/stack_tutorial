@@ -1,0 +1,5 @@
+$('.row#answer-body-' + <%= @answer.id %>).html('<%= j  @answer.body%>');
+$('form#edit-answer-' + <%= @answer.id %>).hide();
+$('.edit-answer-link[data-answer-id="<%= @answer.id %>"]').show();
+
+

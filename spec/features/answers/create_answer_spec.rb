@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../feature_helper'
 
 feature 'User answer the question', %q{
   In order to answer question
@@ -13,7 +13,7 @@ feature 'User answer the question', %q{
 
     visit question_path(question)
 
-    fill_in 'Body', with: "comment"
+    fill_in 'new_answer_body', with: "comment"
     click_on 'Create answer'
 
     within ".answers" do

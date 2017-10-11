@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../feature_helper'
 
 feature "User can view question and it's answers", %q{
   In order to see question with answers
