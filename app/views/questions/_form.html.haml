@@ -1,7 +1,7 @@
 .row
   = render "shared/error_form", object: @question
 .row
-  = form_for @question do |f|
+  = form_for @question, html: {multipart: true} do |f|
     .row
       .col-md-2
         = f.label :title
@@ -12,5 +12,11 @@
         = f.label :body
       .col-md-8
         = f.text_area :body
+    .row
+      .attachments
+        = f.fields_for :attachments do |a|
+          = render "attachments/attachment_fields", f: a
+          .links
+            = link_to_add_association "Add file", f, :attachments, partial: "attachments/attachment_fields"
     .row
       = f.submit "Save"

@@ -4,6 +4,9 @@
 .row
   = @question.body
 .row
+  - @question.attachments.each do |a|
+    = link_to a.file.file.filename, a.file.url
+.row
   - if current_user&.author_of?(@question)
     = link_to 'Delete question', question_path(@question), method: :delete, remote: true
 .row

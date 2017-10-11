@@ -39,6 +39,10 @@ RSpec.describe QuestionsController, :type => :controller do
       expect(assigns(:question)).to be_a_new(Question)
     end
 
+    it 'assigns attachments to a new Attachment' do
+      expect(assigns(:question).attachments.first).to be_a_new(Attachment)
+    end
+
     it 'render new view' do
       expect(response).to render_template :new
     end
@@ -100,7 +104,7 @@ RSpec.describe QuestionsController, :type => :controller do
 
       it 'redirects to updated question' do
          patch :update, params: {id: question, question: {title: "NewTitle", body: "NewBody"}}
-         expect(response). to redirect_to questions_path
+         expect(response). to redirect_to question_path(question)
 
       end
 
