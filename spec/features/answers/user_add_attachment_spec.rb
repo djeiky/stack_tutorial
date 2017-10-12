@@ -29,7 +29,19 @@ feature 'User add attachments to answer', %q{
     end
 
     scenario "with several attachments", js: true do
+      visit question_path(question)
+      fill_in "new_answer_body", with: "Coment"
+      click_on "add file"
 
+      inputs = all('input[type="file"]')
+      inputs[0].set("#{Rails.root}/spec/rails_helper.rb")
+      inputs[1].set("#{Rails.root}/spec/spec_helper.rb")
+
+      click_on "Create answer"
+      within ".answers" do
+        expect(page).to have_link "rails_helper.rb", href: "/uploads/attachment/file/1/rails_helper.rb"
+        expect(page).to have_link "spec_helper.rb", href: "/uploads/attachment/file/2/spec_helper.rb"
+      end
     end
   end
 
