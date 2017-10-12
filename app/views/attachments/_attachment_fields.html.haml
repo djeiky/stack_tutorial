@@ -1,11 +1,8 @@
 .row
-  - if f.object.persisted?
-    %div{id: "destroy_attachments_#{f.object.id}"}
+  .nested-fields{class: ("delete_attachments_#{f.object.id}" if f.object.persisted?)}
+    = f.label :file
+    - if f.object.persisted?
       = f.object.file.file.filename
-      = link_to "delete file", attachment_path(f.object), method: :delete, remote: true
-  - else
-    .nested-fields
-      = f.label :file
-      = f.file_field :file
-      = link_to_remove_association "delete file", f
+    = f.file_field :file
+    = link_to_remove_association "delete file", f
 

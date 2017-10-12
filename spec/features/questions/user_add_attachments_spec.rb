@@ -26,13 +26,13 @@ feature 'User add attachments', %q{
 
   scenario "User can attach file while editing question", js: true do
     visit edit_question_path(question)
-    attach_file "File", "#{Rails.root}/spec/rails_helper.rb"
-   
+
     click_on 'Add file'
     expect(page).to have_content("File", count: 2)
+    all('input[type="file"]').first.set("#{Rails.root}/spec/rails_helper.rb")
     all('input[type="file"]').last.set("#{Rails.root}/spec/spec_helper.rb")
-    
     click_on "Save"
+    
     expect(page).to have_link "rails_helper.rb", href: "/uploads/attachment/file/1/rails_helper.rb"
     expect(page).to have_link "spec_helper.rb", href: "/uploads/attachment/file/2/spec_helper.rb"
 
