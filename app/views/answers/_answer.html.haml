@@ -13,6 +13,8 @@
           = form_for [@question, answer], remote: true, html: {id: "edit-answer-#{answer.id}"} do |f|
             = f.label :body
             = f.text_area :body
+            = f.fields_for :attachments do |a|
+              = render "attachments/attachment_fields", f: a
             = f.submit "Save"
         %p
           = link_to 'Delete answer', question_answer_path(@question, answer), method: :delete, remote: true
