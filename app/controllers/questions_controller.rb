@@ -22,7 +22,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answer = Answer.new#@question.answers.build
+    @answer = @question.answers.build#Answer.new
+    @answer.attachments.build
   end
 
   def edit

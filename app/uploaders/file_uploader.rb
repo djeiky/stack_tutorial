@@ -1,5 +1,5 @@
 class FileUploader < CarrierWave::Uploader::Base
-
+  delegate :identifier, to: :file
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog

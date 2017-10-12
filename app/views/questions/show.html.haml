@@ -5,7 +5,7 @@
   = @question.body
 .row
   - @question.attachments.each do |a|
-    = link_to a.file.file.filename, a.file.url
+    = link_to a.file.identifier, a.file.url
 .row
   - if current_user&.author_of?(@question)
     = link_to 'Delete question', question_path(@question), method: :delete, remote: true
@@ -23,6 +23,9 @@
     .row
     = f.label :body
     = f.text_area :body, id: "new_answer_body"
+    = f.fields_for :attachments do |a|
+      = a.label :file
+      = a.file_field :file
     = f.submit "Create answer"
 .row
   = link_to "Назад", questions_path

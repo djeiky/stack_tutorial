@@ -2,7 +2,7 @@
   .nested-fields{class: ("delete_attachments_#{f.object.id}" if f.object.persisted?)}
     = f.label :file
     - if f.object.persisted?
-      = f.object.file.file.filename
+      = f.object.file.identifier
     = f.file_field :file
     = link_to_remove_association "delete file", f
 

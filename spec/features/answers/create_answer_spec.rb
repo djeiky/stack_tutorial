@@ -12,7 +12,6 @@ feature 'User answer the question', %q{
     sign_in user
 
     visit question_path(question)
-
     fill_in 'new_answer_body', with: "comment"
     click_on 'Create answer'
 
