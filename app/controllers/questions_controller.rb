@@ -8,6 +8,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @question.attachments.build
   end
 
   def create
@@ -21,11 +22,13 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answer = Answer.new#@question.answers.build
+    @answer = @question.answers.build#Answer.new
+    @answer.attachments.build
   end
 
   def edit
     if current_user.author_of?(@question)
+      @question.attachments.build
       render :edit
     else
       redirect_to questions_path
@@ -35,7 +38,7 @@ class QuestionsController < ApplicationController
   def update
     if current_user.author_of?(@question)
       if @question.update(questions_params)
-        redirect_to questions_path
+        redirect_to question_path(@question)
       else
        render :edit
       end
@@ -61,6 +64,6 @@ class QuestionsController < ApplicationController
   end
 
   def questions_params
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body, attachments_attributes: [:id ,:file ,:_destroy])
   end
 end

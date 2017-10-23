@@ -4,6 +4,9 @@
 .row
   = @question.body
 .row
+  - @question.attachments.each do |a|
+    = link_to a.file.identifier, a.file.url
+.row
   - if current_user&.author_of?(@question)
     = link_to 'Delete question', question_path(@question), method: :delete, remote: true
 .row
@@ -18,8 +21,14 @@
     .row
       = render "shared/error_form", object: f.object
     .row
-    = f.label :body
-    = f.text_area :body, id: "new_answer_body"
+      = f.label :body
+      = f.text_area :body, id: "new_answer_body"
+    .row
+      = f.fields_for :attachments do |a|
+        = a.label :file
+        = a.file_field :file
+      = link_to_add_association "add file", f, :attachments, partial: "attachments/attachment_fields"
+
     = f.submit "Create answer"
 .row
   = link_to "Назад", questions_path

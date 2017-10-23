@@ -72,3 +72,6 @@ gem 'autoprefixer-rails'
 
 #Device
 gem 'devise'
+gem 'carrierwave'
+gem 'cocoon'
+gem 'remotipart'
